@@ -20,6 +20,7 @@ class Inventory extends React.Component {
   }
   authHandler = async (authData) => {
     // 1. look up the current store in the firebase database
+
     const store = await base.fetch(this.props.storeId, { context: this });
     console.log(store);
 
@@ -37,12 +38,12 @@ class Inventory extends React.Component {
       uid: authData.user.uid,
       owner: store.owner || authData.user.uid,
     });
-    console.log(authData);
+    console.log("data", authData);
   };
 
   authenticate = (provider) => {
     const authProvider = new firebase.auth[`${provider}AuthProvider`](); //using library directly
-    firebaseApp.auth().signInWithProps(authProvider).then(this.authHandler); //using our own login
+    firebaseApp.auth().signInWithPopup(authProvider).then(this.authHandler); //using our own login
   };
 
   logout = async () => {
@@ -68,7 +69,7 @@ class Inventory extends React.Component {
         </div>
       );
     }
-    return <Login authenticate={this.authenticate} />;
+    // return <Login authenticate={this.authenticate} />;
 
     return (
       <div className="inventory">

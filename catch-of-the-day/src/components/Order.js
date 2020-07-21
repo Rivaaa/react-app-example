@@ -16,6 +16,7 @@ class Order extends React.Component {
     }
     return (
       <li key={key}>
+        <input type="checkbox" />
         {count} lbs {fish.name} {formatPrice(count * fish.price)}
         <button onClick={() => this.props.removeFromOrder(key)}>&times;</button>
       </li>
