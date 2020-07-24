@@ -1,23 +1,25 @@
 import React from "react";
 import Header from "./Header";
 import Inventory from "./Inventory";
-import Order from "./Order";
+// import Order from "./Order";
 import sampleFishes from "../sample-fishes";
 import Fish from "./Fish";
 import base from "../base";
+import _ from "lodash";
+import Navbar from "./Navbar";
 
 class App extends React.Component {
   state = {
-    fishes: {}, //we can add some type of fishes in like fish1 fish2
+    fishes: {},
     order: {},
+    sorted_fishes: {},
+    editing: false,
   };
 
   componentDidMount() {
     const { params } = this.props.match;
-
-    //first resinstate our localStorage
+    const _this = this;
     const localStorageRef = localStorage.getItem(params.storeId);
-    console.log(localStorageRef);
 
     if (localStorageRef) {
       this.setState({
@@ -28,11 +30,14 @@ class App extends React.Component {
     this.ref = base.syncState(`${params.storeId}/fishes`, {
       context: this,
       state: "fishes",
+      onFailure(err) {},
+      then() {
+        _this.setState({ sorted_fishes: _this.state.fishes });
+      },
     });
   }
 
   componentDidUpdate() {
-    console.log(this.state.order);
     localStorage.setItem(
       this.props.match.params.storeId,
       JSON.stringify(this.state.order)
@@ -43,93 +48,100 @@ class App extends React.Component {
     base.removeBinding(this.ref);
   }
 
+  editHandle = () => {
+    this.setState({ editing: !this.state.editing });
+  };
+
+  //
+  sortAscending = () => {
+    const starting_data = { ...this.state.fishes };
+    const sorted_fishes = _.orderBy(starting_data, ["price"], ["asc"]); // Use Lodash to sort array by 'name'
+    console.log("sorted fishes", starting_data);
+    this.setState({ sorted_fishes: sorted_fishes });
+  };
+
+  sortDescending = () => {
+    const starting_data = { ...this.state.fishes };
+    const sorted_fishes = _.orderBy(starting_data, ["price"], ["desc"]);
+    console.log("sorted fishes", starting_data);
+    this.setState({ sorted_fishes: sorted_fishes });
+  };
+  //
   addFish = (fish) => {
-    console.log(fish);
-    //1. take a copy of the existing state(fish1,fish2)
     const fishes = { ...this.state.fishes };
-    //2. add our new fish to that fishes variable(which fish is which, unique number of them)
     fishes[`fish${Date.now()}`] = fish;
-    //3. set the new fishes object into the state(create a new one like fish3 then add to state)
-    this.setState({ fishes: fishes });
+    this.setState({ fishes });
   };
 
   loadSampleFishes = () => {
     this.setState({ fishes: sampleFishes });
   };
 
-  updateFish = (key, updateFish) => {
-    //1. Take a copy of the current state
+  updateFish = (key, updatedFish) => {
     const fishes = { ...this.state.fishes };
-
-    //2. update that state
-
-    fishes[key] = updateFish;
-
-    //3. set the updated fish into state
+    fishes[key] = updatedFish;
     this.setState({
       fishes,
     });
   };
 
   deleteFish = (key) => {
-    //1. take a copy of state
     const fishes = { ...this.state.fishes };
-
-    //2. update the state
     fishes[key] = null;
-
-    //3. update the state
     this.setState({ fishes });
   };
 
   addToOrder = (key) => {
-    //1. take a copy of state
-    const order = { ...this.state.order }; //... is making a copy ot it and putting the copy back
-    //2. either add to the order, or update the number in our order
+    const order = { ...this.state.order };
     order[key] = order[key] + 1 || 1;
-
-    //3. call setState to update our state object with the order
     this.setState({ order });
   };
+
   removeFromOrder = (key) => {
-    //1. take a copy of state
-    const order = { ...this.state.order }; //... is making a copy ot it and putting the copy back
-    //2. delete that item from the order
+    const order = { ...this.state.order };
     delete order[key];
-
-    //3. call setState to update our state object with the order
     this.setState({ order });
   };
+
   render() {
     return (
       <div className="catch-of-the-day">
         <div className="menu">
           <Header tagline="Fresh Seafood Market" />
-          <ul className="fishes">
-            {Object.keys(this.state.fishes).map((key) => (
-              // <p>{this.state.fishes[key].name}</p>
-              <Fish
-                key={key}
-                index={key}
-                details={this.state.fishes[key]}
-                addToOrder={this.addToOrder}
-              />
-            ))}
-          </ul>
+          <button onClick={this.props.loadSampleFishes}>Products</button>
+          <button onClick={this.props.loadSampleFishes}>Inventory</button>
+          <button onClick={this.sortAscending}>asc</button>
+          <button onClick={this.sortDescending}>desc</button>
+          <button onClick={this.editHandle}>
+            {this.state.editing ? "Done" : "Edit"}
+          </button>
+          {this.state.editing ? (
+            <Inventory
+              addFish={this.addFish}
+              updateFish={this.updateFish}
+              deleteFish={this.deleteFish}
+              loadSampleFishes={this.loadSampleFishes}
+              fish={this.state.fishes}
+              storeId={this.props.match.params.storeId}
+            />
+          ) : (
+            <ul className="fishes">
+              {Object.keys(this.state.sorted_fishes).map((key) => (
+                <Fish
+                  key={key}
+                  index={key}
+                  details={this.state.sorted_fishes[key]}
+                  addToOrder={this.addToOrder}
+                />
+              ))}
+            </ul>
+          )}
         </div>
-        <Order
+        {/*<Order
           fishes={this.state.fishes}
           order={this.state.order}
           removeFromOrder={this.removeFromOrder}
-        />
-        <Inventory
-          addFish={this.addFish}
-          updateFish={this.updateFish}
-          deleteFish={this.deleteFish}
-          loadSampleFishes={this.loadSampleFishes}
-          fish={this.state.fishes}
-          storeId={this.props.match.params.storeId}
-        />
+        />*/}
       </div>
     );
   }
