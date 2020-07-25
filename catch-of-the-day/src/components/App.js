@@ -1,12 +1,13 @@
 import React from "react";
 import Header from "./Header";
 import Inventory from "./Inventory";
-// import Order from "./Order";
+import Order from "./Order";
 import sampleFishes from "../sample-fishes";
 import Fish from "./Fish";
 import base from "../base";
 import _ from "lodash";
 import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
 
 class App extends React.Component {
   state = {
@@ -107,11 +108,18 @@ class App extends React.Component {
     return (
       <div className="catch-of-the-day">
         <div className="menu">
-          <Header tagline="Fresh Seafood Market" />
+          <Header tagline="A little shop." />
           <button onClick={this.props.loadSampleFishes}>Products</button>
-          <button onClick={this.props.loadSampleFishes}>Inventory</button>
-          <button onClick={this.sortAscending}>asc</button>
-          <button onClick={this.sortDescending}>desc</button>
+          <button onClick={() => this.props.Cart}>Cart</button>
+
+          <ul className="sorting">
+            <select name="sorting" ref={this.statusRef}>
+              <option onClick={this.sortAscending}>Price</option>
+            </select>
+            <button onClick={this.sortAscending}>asc</button>
+            <button onClick={this.sortDescending}>desc</button>
+          </ul>
+
           <button onClick={this.editHandle}>
             {this.state.editing ? "Done" : "Edit"}
           </button>
@@ -134,14 +142,14 @@ class App extends React.Component {
                   addToOrder={this.addToOrder}
                 />
               ))}
+              <Order
+                fishes={this.state.fishes}
+                order={this.state.order}
+                removeFromOrder={this.removeFromOrder}
+              />
             </ul>
           )}
         </div>
-        {/*<Order
-          fishes={this.state.fishes}
-          order={this.state.order}
-          removeFromOrder={this.removeFromOrder}
-        />*/}
       </div>
     );
   }

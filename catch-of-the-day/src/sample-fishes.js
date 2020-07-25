@@ -3,7 +3,7 @@
 //   {
 //     fish: 1,
 //     name: "Pacific Halibut",
-//     image: "/images/hali.jpg",
+//     image: "/images/deco1.jpg",
 //     desc:
 //       "Everyone's favorite white fish. We will cut it to the size you need and ship it",
 //     price: "1724",
@@ -12,7 +12,7 @@
 //   {
 //     fish: 2,
 //     name: "Lobster",
-//     image: "/images/lobster.jpg",
+//     image: "/images/deco2.jpg",
 //     desc:
 //       "These tender, mouth-watering beauties are a fantastic hit at any dinner party.",
 //     price: "3200",
@@ -22,7 +22,7 @@
 //   {
 //     fish: 3,
 //     name: "Sea Scallops",
-//     image: "/images/scallops.jpg",
+//     image: "/images/deco3.jpg",
 //     desc:
 //       "Big, sweet and tender. True dry-pack scallops from the icey waters of Alaska. About 8-10 per pound",
 //     price: "1684",
@@ -32,7 +32,7 @@
 //   {
 //     fish: 4,
 //     name: "Mahi Mahi",
-//     image: "/images/mahi.jpg",
+//     image: "/images/deco4.jpg",
 //     desc:
 //       "Lean flesh with a mild, sweet flavor profile, moderately firm texture and large, moist flakes. ",
 //     price: "1129",
@@ -42,7 +42,7 @@
 //   {
 //     fish: 5,
 //     name: "King Crab",
-//     image: "/images/crab.jpg",
+//     image: "/images/deco5.jpg",
 //     desc:
 //       "Crack these open and enjoy them plain or with one of our cocktail sauces",
 //     price: "4234",
@@ -52,7 +52,7 @@
 //   {
 //     fish: 6,
 //     name: "Atlantic Salmon",
-//     image: "/images/salmon.jpg",
+//     image: "/images/deco6.jpg",
 //     desc:
 //       "This flaky, oily salmon is truly the king of the sea. Bake it, grill it, broil it...as good as it gets!",
 //     price: "1453",
@@ -62,7 +62,7 @@
 //   {
 //     fish: 7,
 //     name: "Oysters",
-//     image: "/images/oysters.jpg",
+//     image: "/images/deco7.jpg",
 //     desc: "A soft plump oyster with a sweet salty flavor and a clean finish.",
 //     price: "2543",
 //     status: "available",
@@ -71,7 +71,7 @@
 //   {
 //     fish: 8,
 //     name: "Mussels",
-//     image: "/images/mussels.jpg",
+//     image: "/images/deco8.jpg",
 //     desc:
 //       "The best mussels from the Pacific Northwest with a full-flavored and complex taste.",
 //     price: "425",
@@ -81,7 +81,7 @@
 //   {
 //     fish: 9,
 //     name: "Jumbo Prawns",
-//     image: "/images/prawns.jpg",
+//     image: "/images/deco9.jpg",
 //     desc:
 //       "With 21-25 two bite prawns in each pound, these sweet morsels are perfect for shish-kabobs.",
 //     price: "2250",
@@ -93,7 +93,7 @@
 
 const fishes = {
   fish1: {
-    name: "Pacific Halibut",
+    name: "Cactus",
     image: "/images/hali.jpg",
     desc:
       "Everyone’s favorite white fish. We will cut it to the size you need and ship it.",
@@ -130,7 +130,7 @@ const fishes = {
 
   fish5: {
     name: "King Crab",
-    image: "/images/crab.jpg",
+    image: "./images/crab.jpg",
     desc:
       "Crack these open and enjoy them plain or with one of our cocktail sauces",
     price: 4234,

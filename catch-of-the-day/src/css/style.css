@@ -231,7 +231,7 @@ body {
   background: #d4d4d4;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Adobe Caslon', serif;
   font-size: 2rem;
 }
 h1 {
@@ -240,8 +240,10 @@ h1 {
   font-weight: normal;
   margin: 0;
 }
+h3 {
+  font-family: 'Adobe Caslon', serif;
+}
 h2,
-h3,
 h4,
 h5,
 h6 {
@@ -256,39 +258,25 @@ h2 {
 h3 {
   font-size: 3rem;
 }
+body {
+  -webkit-box-align: center;
+          align-items: center;
+}
 header.top {
   text-align: center;
 }
 header.top h1 {
-  font-size: 14.4rem;
+  font-size: 14rem;
   line-height: 0.7;
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: center;
           justify-content: center;
 }
-header.top h1 .ofThe {
-  display: -webkit-box;
-  display: flex;
-  font-size: 3rem;
-  color: #f5a623;
-  -webkit-box-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-          align-items: center;
-  background: url("images/anchor.svg") center no-repeat;
-  background-size: cover;
-  padding: 0 1rem;
-}
-header.top h1 .ofThe .of {
-  padding-right: 2rem;
-  position: relative;
-  right: -0.5rem;
-}
 header.top h3 {
   margin: 0;
   font-size: 2rem;
-  color: #f5a623;
+  color: #808080;
   position: relative;
   display: inline-block;
 }
@@ -330,24 +318,18 @@ header.top h3:after {
 .catch-of-the-day > * {
   -webkit-box-flex: 1;
           flex: 1 4 auto;
-  padding: 2rem;
+  padding: 1rem;
   border: 1rem double #1a1a1a;
   position: relative;
   background: #fff;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 2px rgba(0,0,0,0.1);
   overflow: scroll;
 }
 .catch-of-the-day > *:first-child {
   flex-shrink: 1;
   flex-basis: 50%;
-  -webkit-transform: translateX(50%) rotateY(6deg) translateX(-50%);
-          transform: translateX(50%) rotateY(6deg) translateX(-50%);
 }
 .catch-of-the-day > *:nth-child(2) {
-  -webkit-transform: translateX(-50%) rotateY(-14deg) translateX(50%);
-          transform: translateX(-50%) rotateY(-14deg) translateX(50%);
   border-left: 0;
   border-right: 0;
   min-width: 300px;
@@ -355,31 +337,17 @@ header.top h3:after {
 .catch-of-the-day > *:last-child {
   flex-shrink: 1;
   flex-basis: 50%;
-  -webkit-transform: translateX(-50%) rotateY(10deg) translateX(50%) scale(1.08) translateX(24px);
-          transform: translateX(-50%) rotateY(10deg) translateX(50%) scale(1.08) translateX(24px);
 }
-input#fold:not(:checked) ~ #main .catch-of-the-day > * {
-  -webkit-transform: none;
-          transform: none;
+.catch-of-the-day > * button {
+  padding-right: 10px;
+  right: 10;
+  top: 10;
+  bottom: 10;
 }
-label[for="fold"] {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  text-transform: uppercase;
-  font-size: 1.3rem;
-  background: #000;
-  color: #fff;
-  border: 2px solid #000;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-}
-input#fold {
-  display: none;
-}
-input#fold:checked + label {
-  background: #fff;
-  color: #000;
+b.sorting {
+  padding: -20px;
+  font-size: 1rem;
+  position: middle;
 }
 ul {
   list-style: none;
@@ -388,14 +356,17 @@ ul {
 }
 ul.order li {
   border-bottom: 1px solid #000;
-  padding: 2rem 0;
+  padding: 2rem;
   display: -webkit-box;
   display: flex;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   -webkit-box-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: center;
-          align-items: center;
+  -webkit-box-align: right;
+          align-items: right;
+}
+ul.order li:hover {
+  padding: 1rem 0;
 }
 ul.order li:hover button {
   display: inline;
@@ -433,6 +404,9 @@ ul.order li span.count span {
 .order-title {
   text-align: center;
 }
+.order {
+  align: right;
+}
 .fish-edit {
   margin-bottom: 20px;
   border: 2px solid #000;
@@ -464,13 +438,13 @@ ul.order li span.count span {
   background: #fef2de;
 }
 .fish-edit textarea {
-  width: 100%;
+  width: 50%;
 }
 .fish-edit input:last-of-type {
-  width: 100%;
+  width: 50%;
 }
 .fish-edit button {
-  width: 100%;
+  width: 50%;
   border: 0;
 }
 .list-of-fish {
@@ -478,8 +452,6 @@ ul.order li span.count span {
   border-bottom: 1px solid #000;
   padding-top: 5px;
   margin-top: 2rem;
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
 }
 .menu-fish {
   border-bottom: 2px solid #000;
@@ -490,12 +462,13 @@ ul.order li span.count span {
   clear: both;
   overflow: hidden;
 }
-.menu-fish p {
+.menu-fish .p {
   margin: 0;
   font-size: 1.8rem;
 }
 .menu-fish .fish-name {
-  margin: 0;
+  margin-right: 0;
+  font-size: 5rem;
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: justify;
@@ -504,15 +477,16 @@ ul.order li span.count span {
           align-items: center;
 }
 .menu-fish .price {
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   -webkit-box-pack: end;
           justify-content: flex-end;
 }
 .menu-fish img {
   float: left;
-  width: 150px;
-  margin-right: 1rem;
+  width: 155px;
+  height: 175px;
 }
+object-fit cover,
 button,
 input[type=submit] {
   text-transform: uppercase;
@@ -526,6 +500,7 @@ input[type=submit] {
   position: relative;
   z-index: 2;
 }
+object-fit cover[disabled],
 button[disabled],
 input[type=submit][disabled] {
   color: #d12028;
@@ -534,15 +509,18 @@ input[type=submit][disabled] {
   -webkit-transform: rotate(-10deg) scale(2) translateX(50%) translateY(-50%);
           transform: rotate(-10deg) scale(2) translateX(50%) translateY(-50%);
 }
+object-fit cover[disabled]:hover,
 button[disabled]:hover,
 input[type=submit][disabled]:hover {
   color: #d12028;
   cursor: not-allowed;
 }
+object-fit cover[disabled]:after,
 button[disabled]:after,
 input[type=submit][disabled]:after {
   display: none;
 }
+object-fit cover:after,
 button:after,
 input[type=submit]:after {
   content: '';
@@ -557,31 +535,40 @@ input[type=submit]:after {
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
+object-fit cover:hover,
 button:hover,
 input[type=submit]:hover,
+object-fit cover:focus,
 button:focus,
 input[type=submit]:focus {
   color: #fff;
   outline: 0;
 }
+object-fit cover:hover:after,
 button:hover:after,
 input[type=submit]:hover:after,
+object-fit cover:focus:after,
 button:focus:after,
 input[type=submit]:focus:after {
   height: 100%;
 }
+object-fit cover.warning:after,
 button.warning:after,
 input[type=submit].warning:after {
   background: #d12028;
 }
+object-fit cover.success:after,
 button.success:after,
 input[type=submit].success:after {
   background: #2dc22d;
 }
+object-fit cover.github,
 button.github,
 input[type=submit].github,
+object-fit cover.facebook,
 button.facebook,
 input[type=submit].facebook,
+object-fit cover.twitter,
 button.twitter,
 input[type=submit].twitter {
   border: 0;
@@ -591,26 +578,32 @@ input[type=submit].twitter {
   color: #fff;
   padding: 2rem;
 }
+object-fit cover.github,
 button.github,
 input[type=submit].github {
   background: #82d465;
 }
+object-fit cover.github:after,
 button.github:after,
 input[type=submit].github:after {
   background: #5cc437;
 }
+object-fit cover.facebook,
 button.facebook,
 input[type=submit].facebook {
   background: #3864a3;
 }
+object-fit cover.facebook:after,
 button.facebook:after,
 input[type=submit].facebook:after {
   background: #2d5082;
 }
+object-fit cover.twitter,
 button.twitter,
 input[type=submit].twitter {
   background: #5ea9dd;
 }
+object-fit cover.twitter:after,
 button.twitter:after,
 input[type=submit].twitter:after {
   background: #2c8dd0;
